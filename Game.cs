@@ -17,6 +17,14 @@ namespace HelloWorld
             float damage = 10;
             float powerLevel = 0;
 
+            Console.WriteLine("Hello Dungeon Quest 2: Reloaded Electric Boogaloo & Knuckles");
+
+            /// Makes the console pause and wait for a key to be pressed.
+            /// Can be used to allow the player to move to the next screen
+            /// when they are ready to do so.
+            Console.ReadKey();
+            Console.Clear();
+
             //Assigns name variable based on user input.
             Console.WriteLine("Please input a name.");
             name = Console.ReadLine();

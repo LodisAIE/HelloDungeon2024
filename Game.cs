@@ -6,85 +6,27 @@ namespace HelloWorld
 {
     class Game
     { 
-        
-        public void Run()
+        string name = "";
+        float health = 100;
+        bool playerIsAlive = true;
+        float damage = 10;
+        float powerLevel = 0;
+        string job = "";
+
+        float Add(float lhs, float rhs)
         {
+            float result = lhs + rhs;
+            return result;
+        }
 
-            //Initialize base stats.
-            string name = "";
-            float health = 100;
-            bool playerIsAlive = health > 0;
-            float damage = 10;
-            float powerLevel = 0;
+        string CombineStrings(string lhs, string rhs)
+        {
+            string result = lhs + rhs;
+            return result;
+        }
 
-            Console.WriteLine("Hello Dungeon Quest 2: Reloaded Electric Boogaloo & Knuckles");
-
-            /// Makes the console pause and wait for a key to be pressed.
-            /// Can be used to allow the player to move to the next screen
-            /// when they are ready to do so.
-            Console.ReadKey();
-            Console.Clear();
-
-            //Assigns name variable based on user input.
-            Console.WriteLine("Please input a name.");
-            name = Console.ReadLine();
-            Console.Clear();
-
-            string choice = "";
-            string job = "";
-            bool validInputRecieved = false;
-
-            //Class selection menu  
-            while (!validInputRecieved)
-            {
-                //Display class options
-                Console.WriteLine("Welcome " + name + "!!!");
-                Console.WriteLine("Please select a class");
-                Console.WriteLine("1.Wizard");
-                Console.WriteLine("2.Dwarf");
-                Console.WriteLine("3.Paladin");
-                Console.WriteLine();
-                Console.Write("> ");
-
-                //Get class from player
-                choice = Console.ReadLine();   
-                
-                validInputRecieved = true;
-
-                //Assign stats based on choice
-                //Assign Wizard stats
-                if (choice == "1")
-                {
-                    job = "Wizard";
-                    health = 5025;
-                    damage = 4550;
-                }
-                //Assign Dwarf stats
-                else if (choice == "2")
-                {
-                    job = "Dwarf";
-                    health = 98;
-                    damage = 98999;
-                }
-                //Assign Paladin stats
-                else if (choice == "3")
-                {
-                    job = "Paladin";
-                    health = 269;
-                    damage = 420;
-                }
-                //Otherwise if a invalid input was read...
-                else
-                {
-                    //...display error message and clear the screen
-                    Console.WriteLine("Invalid Input");
-                    Console.ReadKey();
-                    Console.Clear();
-                    validInputRecieved = false;   
-                }
-            }
-
-
+        void DisplayStats()
+        {
             Console.WriteLine("Stats");
 
             Console.Write("Name: ");
@@ -102,6 +44,86 @@ namespace HelloWorld
             powerLevel = health * damage;
             Console.Write("Power Level:");
             Console.WriteLine(powerLevel);
+        }
+
+        string GetInput(string prompt, string option1, string option2, string option3)
+        {
+            string choice = "";
+
+            bool validInputReceived = false;
+
+            while (!validInputReceived)
+            {
+                Console.Clear();
+
+                Console.WriteLine(prompt);
+                Console.WriteLine("1." + option1);
+                Console.WriteLine("2." + option2);
+                Console.WriteLine("3." + option3);
+                Console.Write("> ");
+
+                choice = Console.ReadLine();
+
+                validInputReceived = true;
+
+                if (choice != "1" && choice != "2" && choice != "3")
+                {
+                    validInputReceived = false;
+                    Console.WriteLine("Invalid Input");
+                    Console.ReadKey();
+                }
+            }
+
+            return choice;
+        }
+
+        public void Run()
+        {
+            //Initialize base stats.
+
+            Console.WriteLine("Hello Dungeon Quest 2: Reloaded Electric Boogaloo & Knuckles");
+
+            /// Makes the console pause and wait for a key to be pressed.
+            /// Can be used to allow the player to move to the next screen
+            /// when they are ready to do so.
+            Console.ReadKey();
+            Console.Clear();
+
+            //Assigns name variable based on user input.
+            Console.WriteLine("Please input a name.");
+            name = Console.ReadLine();
+            Console.Clear();
+          
+            //Display class options
+            Console.WriteLine("Welcome " + name + "!!!");
+            Console.ReadKey();
+
+            string choice = GetInput("Please select a class.", "Wizard", "Dwarf", "Paladin");
+
+            //Assign stats based on choice
+            //Assign Wizard stats
+            if (choice == "1")
+            {
+                job = "Wizard";
+                health = 5025;
+                damage = 4550;
+            }
+            //Assign Dwarf stats
+            else if (choice == "2")
+            {
+                job = "Dwarf";
+                health = 98;
+                damage = 98999;
+            }
+            //Assign Paladin stats
+            else if (choice == "3")
+            {
+                job = "Paladin";
+                health = 269;
+                damage = 420;
+            }
+
+            DisplayStats();
 
             Console.ReadKey();
             Console.Clear();
@@ -136,7 +158,7 @@ namespace HelloWorld
                 Console.Clear();
             }
 
-
+            DisplayStats();
         }
     }
 }

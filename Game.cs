@@ -12,6 +12,9 @@ namespace HelloWorld
         float damage = 10;
         float powerLevel = 0;
         string job = "";
+        bool gameOver = false;
+        string choice = "";
+        int currentScene = 0;
 
         float Add(float lhs, float rhs)
         {
@@ -23,6 +26,20 @@ namespace HelloWorld
         {
             string result = lhs + rhs;
             return result;
+        }
+
+        bool CheckIsEven(float value)
+        {
+            if (value % 2 == 0)
+            {
+                return true;
+            }
+            else if (value % 2 != 0)
+            {
+                return false;
+            }
+
+            return false;
         }
 
         void DisplayStats()
@@ -48,7 +65,6 @@ namespace HelloWorld
 
         string GetInput(string prompt, string option1, string option2, string option3)
         {
-            string choice = "";
 
             bool validInputReceived = false;
 
@@ -77,7 +93,7 @@ namespace HelloWorld
             return choice;
         }
 
-        public void Run()
+        void DisplayStatMenu()
         {
             //Initialize base stats.
 
@@ -93,7 +109,7 @@ namespace HelloWorld
             Console.WriteLine("Please input a name.");
             name = Console.ReadLine();
             Console.Clear();
-          
+
             //Display class options
             Console.WriteLine("Welcome " + name + "!!!");
             Console.ReadKey();
@@ -127,9 +143,10 @@ namespace HelloWorld
 
             Console.ReadKey();
             Console.Clear();
+        }
 
-            
-
+        void DisplayRoom1()
+        {
             int numberOfTries = 3;
 
             for (int i = 0; i < numberOfTries; i++)
@@ -159,6 +176,31 @@ namespace HelloWorld
             }
 
             DisplayStats();
+            currentScene = 0;
+        }
+
+        void DisplayCurrentScene()
+        {
+            if (currentScene == 0)
+            {
+                DisplayStatMenu();
+            }
+            else if (currentScene == 1)
+            {
+                DisplayRoom1();
+            }
+            else if (currentScene == 2)
+            {
+                //DisplayRoom2();
+            }
+        }
+
+        public void Run()
+        {
+            while (!gameOver)
+            {
+                DisplayCurrentScene();
+            }
         }
     }
 }
